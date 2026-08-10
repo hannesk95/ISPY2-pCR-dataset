@@ -1,14 +1,21 @@
+import os
 import time
 import pandas as pd
 from tcia_utils import nbia
 from tqdm import tqdm
 
-def download_data(file_path=None, output_dir=None):
+def download_data(manifest_file_path=None, download_dir=None):
+    """
+    Downloads the ISPY2 dataset from the TCIA repository based on the provided Excel file.
+    """
 
-    assert file_path is not None, "Please provide a valid file path to the Excel file. You can download the Excel file from https://github.com/compai-lab/2026-miccai-grail-kiechle"
-    assert output_dir is not None, "Please provide a valid output directory to save the downloaded data."
+    assert manifest_file_path is not None, "Please provide a valid file path to the Excel file. You can download the Excel file from https://github.com/hannesk95/ISPY2-pCR-dataset/tree/main/data"
+    assert download_dir is not None, "Please provide a valid output directory to save the downloaded data."
 
-    df = pd.read_excel(file_path)
+    assert os.path.exists(manifest_file_path), f"The provided file path does not exist: {manifest_file_path}"
+    assert os.path.exists(download_dir), f"The provided output directory does not exist: {download_dir}"
+
+    df = pd.read_excel(manifest_file_path)
     df = df[df["Patient ID"].str.contains("ISPY2")]
     df = df[df["Series Description"].str.contains("DCE") | df["Modality"].str.contains("SEG")]
     df = df.sort_values(by=["Patient ID", "Study Description"])
@@ -69,11 +76,9 @@ def download_data(file_path=None, output_dir=None):
 
     for attempt in range(5):
         try:
-            nbia.downloadSeries(df_final["Series Instance UID"].tolist(), input_type="list", path=output_dir)        
+            nbia.downloadSeries(df_final["Series Instance UID"].tolist(), input_type="list", path=download_dir)
             break
 
         except Exception as e:
             print(f"Attempt {attempt+1} failed with error: {e}")
             time.sleep(30)
-
-
