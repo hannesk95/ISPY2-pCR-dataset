@@ -11,11 +11,11 @@ download_dir = "path/to/output/directory"
 manifest_file_path = "path/to/tcia/manifest/xlsx/file" # can be found at https://github.com/hannesk95/ISPY2-pCR-dataset/tree/main/data
 clinical_file_path = "path/to/clinical_xlsx/file" # can be found at https://github.com/hannesk95/ISPY2-pCR-dataset/tree/main/data
 
-download_data(manifest_file_path=manifest_file_path, 
-              download_dir=download_dir)
+download_data(download_dir=download_dir,
+              manifest_file_path=manifest_file_path)
 
 preprocess_data(download_dir=download_dir,
-                clinical_file_path=)
+                clinical_file_path=clinical_file_path)
 ```
 
 ## Citation
