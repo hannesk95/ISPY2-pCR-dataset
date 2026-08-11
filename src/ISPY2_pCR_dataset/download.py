@@ -4,7 +4,7 @@ import pandas as pd
 from tcia_utils import nbia
 from tqdm import tqdm
 
-def download_data(manifest_file_path=None, download_dir=None):
+def download_data(download_dir=None, manifest_file_path=None):
     """
     Downloads the ISPY2 dataset from the TCIA repository based on the provided Excel file.
     """
