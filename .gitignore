@@ -1,0 +1,12 @@
+# directories
+conda_env/
+dist/
+src/*egg-info/
+downloads/
+.vscode/
+__pycache__/
+tests/
+
+# files
+upload_to_pypi_commands.txt
+pyproject.tomltests/
