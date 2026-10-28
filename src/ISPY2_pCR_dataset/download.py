@@ -4,10 +4,16 @@ import pandas as pd
 from tcia_utils import nbia
 from tqdm import tqdm
 
-def download_data(download_dir=None, manifest_file_path=None):
+def download_data(download_dir=None, manifest_file_path=None, first_n: int = None):
     """
     Downloads the ISPY2 dataset from the TCIA repository based on the provided Excel file.
     """
+
+    # if download_dir exists, delete and create again, otherwise create it
+    if os.path.exists(download_dir):
+        import shutil
+        shutil.rmtree(download_dir)
+    os.makedirs(download_dir)
 
     assert manifest_file_path is not None, "Please provide a valid file path to the Excel file. You can download the Excel file from https://github.com/hannesk95/ISPY2-pCR-dataset/tree/main/data"
     assert download_dir is not None, "Please provide a valid output directory to save the downloaded data."
@@ -73,6 +79,9 @@ def download_data(download_dir=None, manifest_file_path=None):
     print("Patients with 4 timepoints:", len(patients_with_4_timepoints))
 
     df_final = df[df["Patient ID"].isin(patients_with_3_timepoints)]
+    
+    if first_n is not None:
+        df_final = df_final.head(first_n)
 
     for attempt in range(5):
         try:
