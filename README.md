@@ -5,17 +5,17 @@ Implementation of the ISPY2 dataset curation pipeline for breast cancer patholog
 ## Example Usage
 
 ```python
-from ISPY2_pCR_dataset import download_data, preprocess_data
+from ISPY2_pCR_dataset import download_and_preprocess
 
 download_dir = "path/to/output/directory"
-manifest_file_path = "path/to/tcia/manifest/xlsx/file" # can be found at https://github.com/hannesk95/ISPY2-pCR-dataset/tree/main/data
+manifest_file_path = "path/to/manifest_xlsx/file" # can be found at https://github.com/hannesk95/ISPY2-pCR-dataset/tree/main/data
 clinical_file_path = "path/to/clinical_xlsx/file" # can be found at https://github.com/hannesk95/ISPY2-pCR-dataset/tree/main/data
 
-download_data(download_dir=download_dir,
-              manifest_file_path=manifest_file_path)
-
-preprocess_data(download_dir=download_dir,
-                clinical_file_path=clinical_file_path)
+download_and_preprocess(
+    download_dir=download_dir,
+    manifest_file_path=manifest_file_path,
+    clinical_file_path=clinical_file_path
+    )
 ```
 
 ## Citation
