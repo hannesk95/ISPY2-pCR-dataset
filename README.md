@@ -4,6 +4,8 @@ Implementation of the ISPY2 dataset curation pipeline for breast cancer patholog
 
 ## Example Usage
 
+#### 1. Create a Python file with the following content (e.g. ispy2_pcr_dataset.py)
+
 ```python
 from ISPY2_pCR_dataset import download_and_preprocess
 
@@ -17,6 +19,15 @@ download_and_preprocess(
     clinical_file_path=clinical_file_path
     )
 ```
+
+#### 2. Start a tmux session, run the Python script, and enjoy a coffee (or several) this will take a while!
+```bash
+$ tmux
+$ python ispy2_pcr_dataset.py
+```
+
+####
+
 
 ## Citation
 
